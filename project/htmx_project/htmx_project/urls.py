@@ -16,7 +16,12 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from sim import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('', views.example, name='example'),
+    path('createUser/', views.createUser, name='createUser'),
+    # path('update_demographics/<id>', views.update_demographics, name='update_demographics'),
+    path('delete_demographics/<id>', views.delete_demographics, name='delete_demographics'),
 ]

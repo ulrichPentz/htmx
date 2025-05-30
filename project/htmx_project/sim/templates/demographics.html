@@ -1,0 +1,93 @@
+{% extends "base.html" %}
+{% block start %}
+ 
+ 
+ 
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+<style>
+  .text{
+    color: green;
+    font-weight: bold;
+  }
+</style>
+ 
+<div class="container mt-5">
+    
+    <form class="col-6 mx-auto card p-3 shadow-lg" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <!-- <h2 class="text  text-center"> GeeksforGeeks </h2> -->
+        <br>
+        <h3>Add Student</h3>
+        <hr>
+        <div class="form-group">
+          <label for="exampleInputEmail1">Student name</label>
+          <input name="demographics_name" type="text" class="form-control"  required>
+         </div>
+         <div class="form-group">
+          <label for="exampleInputEmail1">Student surname</label>
+          <input name="demographics_surname" type="text" class="form-control"  required>
+         </div>
+         <div class="form-group">
+          <label for="exampleInputEmail1">Student age</label>
+          <input name="demographics_age" type="text" class="form-control"  required>
+         </div>
+        <div class="form-group">
+          <label for="exampleInputPassword1"  >Student address</label>
+          <textarea name="demographics_address" class="form-control" required ></textarea>
+        </div>
+        <!-- <div class="form-group">
+            <label for="exampleInputPassword1">Student Image</label>
+            <input name="demographics_image" type="file" class="form-control" >
+          </div> -->
+       
+        <button type="submit" class="btn btn-success">Add Student</button>
+      </form>
+ 
+      <hr>
+      <div class="class mt-5">
+        <form action="">
+ 
+          <div class="max-auto col-6">
+            <div class="form-group">
+              <label for="exampleInputEmail1">Search Student</label>
+              <input name="search" type="text" class="form-control">
+            </div>
+            <button type="submit" class="btn btn-primary "> Search</button>
+          </form>
+        </div>
+      </div>
+      <table class="table mt-5">
+        <thead>
+ 
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Student name</th>
+            <th scope="col">Student surname</th>
+            <th scope="col">Student age</th>
+            <th scope="col">Student address</th>
+            <!-- <th scope="col">Image</th> -->
+            <th scope="col">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+            {% for demographic in demographics %}
+          <tr>
+            <th scope="row">{{forloop.counter}}</th>
+            <td>{{demographic.demographics_name}}</td>
+            <td>{{demographic.demographics_surname}}</td>
+            <td>{{demographic.demographics_age}}</td>
+            <td>{{demographic.demographics_address}}</td>
+            <!-- <td>
+                <img src="/uploads/4.jpg" style="height: 100px;"> </td> -->
+                <td>
+                    <a href="/delete_demographics/{{demographic.id }}" class="btn btn-danger m-2">Delete</a>
+                    <a href="/update_demographics/{{demographic.id }}" class="btn btn-success">Update</a>
+                </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+       
+</div>
+ 
+{% endblock %}

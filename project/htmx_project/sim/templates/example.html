@@ -12,18 +12,48 @@
   <body>
     <h1>Please add your most valuable data for us to sell:</h1>
 
-    <form hx-post="{% url 'sample-post' %}" hx-target="#message">
+    <form hx-post="{% url 'createUser' %}" hx-target="#message">
       {% csrf_token %}
-      <input type="text" name="name" placeholder="Name" required />
-      <input type="email" name="email" placeholder="Email" required />
-      <input
+      <input type="text" name="app_name" placeholder="Name" required />
+      <input type="email" name="app_email" placeholder="Email" required />
+      <!-- <input
         type="color"
         name="favourite_color"
         placeholder="Favourite color"
         required
-      />
+      /> -->
       <input type="submit" value="Submit" />
     </form>
     <div id="message"></div>
+    <table class="table mt-5">
+        <thead>
+ 
+          <tr>
+            <th scope="col">Name</th>
+            <th scope="col">Email</th>
+            <!-- <th scope="col">Student age</th>
+            <th scope="col">Student address</th> -->
+            <!-- <th scope="col">Image</th> -->
+            <th scope="col">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+            {% for product in products %}
+          <tr>
+            <!-- <th scope="row">{{forloop.counter}}</th> -->
+            <td>{{product.app_name}}</td>
+            <td>{{product.app_email}}</td>
+            <!-- <td>{{demographic.demographics_age}}</td>
+            <td>{{demographic.demographics_address}}</td> -->
+            <!-- <td>
+                <img src="/uploads/4.jpg" style="height: 100px;"> </td> -->
+                <td>
+                    <a href="/delete_demographics/{{product.id }}" class="btn btn-danger m-2">Delete</a>
+                    <a href="/update_demographics/{{product.id }}" class="btn btn-success">Update</a>
+                </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
   </body>
 </html>

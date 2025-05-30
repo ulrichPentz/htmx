@@ -1,18 +1,38 @@
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 from django.http import HttpResponse
+from .models import Products
 
 
-def sample_post(request, *args, **kwargs):
+def createUser(request, *args, **kwargs):
     print(f'{request.POST = }')
-    name = request.POST.get('name', '')
-    email = request.POST.get('email', '')
-    favourite_colour = request.POST.get('favourite_color', '')
+    app_name = request.POST.get('app_name', '')
+    app_email = request.POST.get('app_email', '')
+    # favourite_colour = request.POST.get('favourite_color', '')
 
-    if name and email and favourite_colour:
-            return HttpResponse('<p class="success">Form submitted successfully! ✅</p>')
-    else:    
-            return HttpResponse('<p class="error">Please provide both name and email and favourite color.❌</p>')
+    # if name and email:
+    #         return HttpResponse('<p class="success">Form submitted successfully! ✅</p>')
+    # else:    
+    #         return HttpResponse('<p class="error">Please provide both name and email and favourite color.❌</p>')
 
+    Products.objects.create(
+            app_name = app_name,
+            app_email = app_email,
+        )
+    queryset = Products.objects.all()
+    context = {'products': queryset}
+    # return HttpResponse('<p class="success">Form submitted successfully! ✅</p>')
+    # return render('example.html', context)
+    return example(request)
+
+def delete_demographics(request, id):
+    if request.method == 'GET':
+        queryset = Products.objects.get(id=id)
+        queryset.delete()
+        return redirect('/')    
 
 def example(request):
-    return render(request, 'example.html')
+    queryset = Products.objects.all()
+    context = {'products': queryset}
+    return render(request, 'example.html', context)
+
+
