@@ -2,7 +2,6 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <!-- <meta http-equiv="refresh" content="1"> -->
     <title>Simple form</title>
     <script
       src="https://unpkg.com/htmx.org@1.9.4"
@@ -14,7 +13,7 @@
   </head>
   <body>
  
-  <form hx-post="{% url 'updateUser' %}">
+  <form hx-post="{% url 'updateUser' %}" hx-replace-url="../">
     {% csrf_token %}
 
     <hr>
@@ -32,21 +31,7 @@
       <input name="app_email" value="{{products.app_email}}" class="form-control"
         required></input>
     </div>
-    <!-- <div class="form-group">
-      <label for="exampleInputPassword1">Student age</label>
-      <input name="demographics_age" value="{{demographics.demographics_age}}" class="form-control"
-        required></input>
-    </div>
-    <div class="form-group">
-      <label for="exampleInputPassword1">Student address</label>
-      <textarea name="demographics_address" value="{{demographics.demographics_address}}" class="form-control"
-        required>{{demographics.demographics_address}}</textarea>
-    </div> -->
-    <!-- <div class="form-group">
-      <label for="exampleInputPassword1">Student Image</label>
-      <input name="demographics_image" type="file" class="form-control">
-    </div> -->
- 
+    
     <button type="submit" class="btn btn-success">Update Student</button>
   </form>
  

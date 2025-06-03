@@ -13,50 +13,35 @@
     
   </head>
   <body>
-    <!-- <h1>Please add your most valuable data for us to sell:</h1> -->
-
+    
     <form hx-post="{% url 'createUser' %}" hx-target="#contacts-table" hx-on::after-request="if(event.detail.successful) this.reset()">
       {% csrf_token %}
       <input id="name" type="text" name="app_name" placeholder="Name" required />
       <input type="email" name="app_email" placeholder="Email" required />
-      <!-- <input
-        type="color"
-        name="favourite_color"
-        placeholder="Favourite color"
-        required
-      /> -->
       <input type="submit" value="Submit" hx-boost=true/>
     </form>
-    <!-- <div id="message"></div> -->
     <table class="table mt-5" id="contacts-table">
       <thead>
  
           <tr>
             <th scope="col">Name</th>
             <th scope="col">Email</th>
-            <!-- <th scope="col">Student age</th>
-            <th scope="col">Student address</th> -->
-            <!-- <th scope="col">Image</th> -->
             <th scope="col">Actions</th>
           </tr>
         </thead>
         <tbody hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'>
             {% for product in products %}
           <tr>
-            <!-- <th scope="row">{{forloop.counter}}</th> -->
+            
             <td>{{product.app_name}}</td>
             <td>{{product.app_email}}</td>
-            <!-- <td>{{demographic.demographics_age}}</td>
-            <td>{{demographic.demographics_address}}</td> -->
-            <!-- <td>
-                <img src="/uploads/4.jpg" style="height: 100px;"> </td> -->
+            
                 <td>
                     
                     <button class="btn danger" hx-target="#contacts-table" hx-delete="deleteDemographics/{{product.id }}">
                       Delete
                     </button>
                      <a href="{% url 'update_demographics' id=product.id %}" class="nav-link">Edit</a>      
-                    <a href="/update_demographics/{{product.id}}" class="btn btn-success">Update</a>
                 </td>
           </tr>
           {% endfor %}
