@@ -1,36 +1,39 @@
-{% extends "base.html" %}
-{% block start %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <!-- <meta http-equiv="refresh" content="1"> -->
+    <title>Simple form</title>
+    <script
+      src="https://unpkg.com/htmx.org@1.9.4"
+      integrity="sha384-zUfuhFKKZCbHTY6aRR46gxiqszMk5tcHjsVFxnUo8VMus4kHGVdIYVbOYYNlKmHV"
+      crossorigin="anonymous"
+    ></script>
+    
+    
+  </head>
+  <body>
  
-<link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-<style>
-  .text{
-    color: green;
-    font-weight: bold;
-  }
-</style>
- 
-<div class="container mt-5">
- 
-  <form class="col-6 mx-auto card p-3 shadow-lg" method="post" enctype="multipart/form-data" >
+  <form hx-post="{% url 'updateUser' %}">
     {% csrf_token %}
 
     <h>Update Student</h>
     <hr>
-    <!-- <div class="form-group">
-      <label for="exampleInputEmail1">Student name</label>
-      <input name="demographics_name" value="{{demographics.demographics_name}}" type="text" class="form-control" required>
-    </div> -->
+    <div class="form-group">
+      <label for="exampleInputEmail1">Student id</label>
+      <input name="app_id" value="{{products.id}}" type="text" class="form-control" required>
+    </div>
     <div class="form-group">
       <label for="exampleInputPassword1">Student name</label>
-      <input name="demographics_name" value="{{demographics.demographics_name}}" class="form-control"
+      <input name="app_name" value="{{products.app_name}}" class="form-control"
         required></input>
     </div>
     <div class="form-group">
       <label for="exampleInputPassword1">Student surname</label>
-      <input name="demographics_surname" value="{{demographics.demographics_surname}}" class="form-control"
+      <input name="app_email" value="{{products.app_email}}" class="form-control"
         required></input>
     </div>
-    <div class="form-group">
+    <!-- <div class="form-group">
       <label for="exampleInputPassword1">Student age</label>
       <input name="demographics_age" value="{{demographics.demographics_age}}" class="form-control"
         required></input>
@@ -39,7 +42,7 @@
       <label for="exampleInputPassword1">Student address</label>
       <textarea name="demographics_address" value="{{demographics.demographics_address}}" class="form-control"
         required>{{demographics.demographics_address}}</textarea>
-    </div>
+    </div> -->
     <!-- <div class="form-group">
       <label for="exampleInputPassword1">Student Image</label>
       <input name="demographics_image" type="file" class="form-control">
@@ -51,4 +54,5 @@
  
 </div>
  
-{% endblock %}
+</body>
+</html>
